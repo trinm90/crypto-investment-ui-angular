@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CoinPrice, InvestedCoin } from '../../models/coin.interface';
+import { CoinPrice } from '../../models/coin.interface';
 import { CurrencyPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.interface';
