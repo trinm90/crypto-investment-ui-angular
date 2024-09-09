@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { environment } from '../../../environments/environment';
 
-
 @Component({
   selector: 'app-header',
   standalone: true,

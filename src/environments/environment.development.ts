@@ -1,5 +1,5 @@
 export const environment = {
-    production: true,
-    version: '1.9.9',
+    production: false,
+    version: 'dev 999999',
     apiKey: 'devKey'
 };
