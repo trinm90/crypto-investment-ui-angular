@@ -20,7 +20,6 @@ import { environment } from '../../../environments/environment';
 export class HeaderComponent {
   @Output() toggleSidebarEmitter: EventEmitter<any> = new EventEmitter();
 
-  // version: string = process.env.version;
   version: string = environment.version;
 
   toggleSidebar() {
