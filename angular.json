@@ -87,6 +87,10 @@
             "development": {
               "buildTarget": "crypto-investment-ui-angular:build:development"
             }
+            ,
+            "staging": {
+              "buildTarget": "crypto-investment-ui-angular:build:staging"
+            }
           },
           "defaultConfiguration": "development"
         },
