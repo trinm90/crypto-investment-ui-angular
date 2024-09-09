@@ -30,54 +30,7 @@ export class CoinPriceBoardComponent {
   }
 
   ngOnInit(): void {
-    this.updatePriceLoop();
-  }
-
-  async updatePriceLoop() {
-    while (true) {
-      this.getCoinPriceFromBinance();
-      await this.delay(9999);
-
-    }
-  }
-
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  getCoinPriceFromBinance(): void {
-    const binancePriceAPI = 'https://api.binance.com/api/v3/ticker/price';
-
-    const BTCSymbol: string = 'BTCUSDT';
-    const ETHSymbol: string = 'ETHUSDT';
-    const BNBSymbol: string = 'BNBUSDT';
-    const BGBSymbol: string = 'BGBUSDT';
-    
-    this.http.get(binancePriceAPI)
-      .subscribe({
-        next: (coinPricesResponse: any) => {          
-          for (let price in coinPricesResponse) {
-            if (coinPricesResponse[price].symbol === BTCSymbol
-              || coinPricesResponse[price].symbol === ETHSymbol
-              || coinPricesResponse[price].symbol === BNBSymbol
-              || coinPricesResponse[price].symbol === BGBSymbol
-            ) {
-              const coinIndex: number = this.coinPrices.findIndex(x => x.symbol === coinPricesResponse[price].symbol);
-
-              if (coinIndex !== -1) {
-                this.coinPrices.splice(coinIndex, 1);
-              }
-
-              this.coinPrices.push({
-                symbol: coinPricesResponse[price].symbol,
-                price: coinPricesResponse[price].price,
-              });
-            }
-
-          }
-        }, error: (error) => {
-        }
-      })
+    this.updateLoop();
   }
 
   sellCoins(symbol: string, amount: number) {
@@ -114,5 +67,59 @@ export class CoinPriceBoardComponent {
     }
 
   }
+
+  private async updateLoop() {
+    while (true) {
+      this.getCoinPriceFromBinance();
+      await this.delay(9999);
+    }
+  }
+
+  private getCoinPriceFromBinance(): void {
+    const binancePriceAPI = 'https://api.binance.com/api/v3/ticker/price';
+
+    const BTCSymbol: string = 'BTCUSDT';
+    const ETHSymbol: string = 'ETHUSDT';
+    const BNBSymbol: string = 'BNBUSDT';
+    const BGBSymbol: string = 'BGBUSDT';
+
+    this.http.get(binancePriceAPI)
+      .subscribe({
+        next: (coinPricesResponse: any) => {
+          for (let priceResponse in coinPricesResponse) {
+            const symbol: string = coinPricesResponse[priceResponse].symbol;
+            const price: number = coinPricesResponse[priceResponse].price;
+
+            if (symbol === BTCSymbol
+              || symbol === ETHSymbol
+              || symbol === BNBSymbol
+              || symbol === BGBSymbol
+            ) {
+              const coinIndex: number = this.coinPrices.findIndex(x => x.symbol === symbol);
+
+              if (coinIndex !== -1) {
+                this.coinPrices.splice(coinIndex, 1);
+              }
+
+              this.coinPrices.push({
+                symbol: symbol,
+                price: price,
+              });
+            }
+
+          }
+        }, error: (error) => {
+        }
+      })
+  }
+
+  private calculatePriceChange() {
+
+  }
+
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 
 }
