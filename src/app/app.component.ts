@@ -14,7 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 export class AppComponent {
   title = 'Crypto Investment';
 
-  sidebarOpen = true;
+  sidebarOpen = false;
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
