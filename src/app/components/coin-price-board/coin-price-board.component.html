@@ -12,7 +12,7 @@
             <tr>
                 <td>{{coinPrice.symbol}}</td>
                 <td>{{coinPrice.price | currency}}</td>
-                <td><button (click)="buyCoins(coinPrice.symbol, 9)">Buy</button></td>
+                <td><button (click)="buyCoins(coinPrice.symbol)">Buy</button></td>
             </tr>
             }
         </tbody>
@@ -33,13 +33,13 @@
             @for (investedCoin of user.investedCoins; track investedCoin.id) {
             <tr>
                 <td>{{investedCoin.symbol}}</td>
-                <td>{{investedCoin.boughtAtPrice | currency}}</td>
+                <td>{{investedCoin.boughtAtPrice | currency:'USD':'symbol'}}</td>
                 <td>{{investedCoin.amount}}</td>
                 <td>{{investedCoin.time | date:'long'}}</td>
-                <td><button (click)="sellCoins(investedCoin.symbol, 9)">Sell</button></td>
+                <td><button (click)="sellCoins(investedCoin.symbol)">Sell</button></td>
             </tr>
             }
         </tbody>
     </table>
-    <p>{{message}}</p>
+    <p>{{message}}{{transactionAmount | currency:'USD':'symbol'}}</p>
 </div>

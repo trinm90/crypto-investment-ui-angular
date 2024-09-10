@@ -21,15 +21,23 @@ export class CoinPriceBoardComponent {
     { symbol: 'BTCUSDT Moon', price: 99999 },
   ];
 
-  time: Date = new Date();
-
   user: User = {
     id: crypto.randomUUID(),
     fund: 999999,
-    investedCoins: [{ id: crypto.randomUUID(), symbol: 'BTCUSDT', boughtAtPrice: 99999, amount: 9, time: this.time }]
+    investedCoins: [{
+      id: crypto.randomUUID(),
+      symbol: 'BTCUSDT',
+      boughtAtPrice: 99999,
+      amount: 9,
+      time: new Date(),
+    }]
   }
 
-  message: string = 'Welcome to T Crypto Exchange';
+  message: string = 'Welcome to T Crypto Exchange, your fund: ';
+
+  transactionAmount: number = 999999;
+
+  private updateTimeInMs: number = 999;
 
   constructor(private http: HttpClient) {
   }
@@ -38,7 +46,7 @@ export class CoinPriceBoardComponent {
     this.updateLoop();
   }
 
-  sellCoins(symbol: string, amount: number) {
+  sellCoins(symbol: string, amount: number = 9) {
     const indexCoinPrice: number = this.coinPrices.findIndex(x => x.symbol === symbol);
     const coin: CoinPrice = this.coinPrices[indexCoinPrice];
     const receiving: number = amount * coin.price;
@@ -50,31 +58,32 @@ export class CoinPriceBoardComponent {
       this.user.investedCoins.splice(indexInvestedCoin, 1);
     }
 
-    this.message = 'Successful sell: ' + receiving.toString();
+    this.transactionAmount = receiving;
+    this.message = 'Successful sell: ';
   }
 
-  buyCoins(symbol: string, amount: number) {
+  buyCoins(symbol: string, amount: number = 9) {
     const indexCoinPrice: number = this.coinPrices.findIndex(x => x.symbol == symbol);
     const coin: CoinPrice = this.coinPrices[indexCoinPrice];
 
     const cost: number = amount * coin.price;
-
+    
     if (cost <= this.user.fund) {
       this.user.fund -= cost;
-
-      let timeWithTimezone: Date = new Date();
 
       this.user.investedCoins.push({
         id: crypto.randomUUID(),
         symbol: coin.symbol,
         boughtAtPrice: coin.price,
         amount: amount,
-        time: timeWithTimezone,
+        time: new Date(),
       });
-      this.message = 'Successful buy: ' + cost.toString();
+
+      this.transactionAmount = cost;
+      this.message = 'Successful buy: ';
     }
     else {
-      this.message = 'Not enough fund: ' + cost.toString();
+      this.message = 'Not enough fund to buy: ';
     }
 
   }
@@ -82,7 +91,7 @@ export class CoinPriceBoardComponent {
   private async updateLoop() {
     while (true) {
       this.getCoinPriceFromBinance();
-      await this.delay(9999);
+      await this.delay(this.updateTimeInMs);
     }
   }
 
@@ -131,6 +140,5 @@ export class CoinPriceBoardComponent {
   private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
 
 }
