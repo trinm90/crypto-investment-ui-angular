@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CoinPrice } from '../../models/coin.interface';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.interface';
 
@@ -8,7 +8,10 @@ import { User } from '../../models/user.interface';
 @Component({
   selector: 'app-coin-price-board',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [
+    DatePipe,
+    CurrencyPipe
+  ],
   templateUrl: './coin-price-board.component.html',
   styleUrl: './coin-price-board.component.scss'
 })
@@ -18,10 +21,12 @@ export class CoinPriceBoardComponent {
     { symbol: 'BTCUSDT Moon', price: 99999 },
   ];
 
+  time: Date = new Date();
+
   user: User = {
     id: crypto.randomUUID(),
     fund: 999999,
-    investedCoins: [{ id: crypto.randomUUID(), symbol: 'BTCUSDT', boughtAtPrice: 99999, amount: 9 }]
+    investedCoins: [{ id: crypto.randomUUID(), symbol: 'BTCUSDT', boughtAtPrice: 99999, amount: 9, time: this.time }]
   }
 
   message: string = 'Welcome to T Crypto Exchange';
@@ -57,8 +62,14 @@ export class CoinPriceBoardComponent {
     if (cost <= this.user.fund) {
       this.user.fund -= cost;
 
+      let timeWithTimezone: Date = new Date();
+
       this.user.investedCoins.push({
-        id: crypto.randomUUID(), symbol: coin.symbol, boughtAtPrice: coin.price, amount: amount
+        id: crypto.randomUUID(),
+        symbol: coin.symbol,
+        boughtAtPrice: coin.price,
+        amount: amount,
+        time: timeWithTimezone,
       });
       this.message = 'Successful buy: ' + cost.toString();
     }

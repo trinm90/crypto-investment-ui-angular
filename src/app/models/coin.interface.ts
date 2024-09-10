@@ -8,4 +8,5 @@ export interface InvestedCoin {
     symbol: string;
     boughtAtPrice: number;
     amount: number;
+    time: Date;
 }
