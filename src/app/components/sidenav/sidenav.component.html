@@ -1,6 +1,11 @@
-<div>
-    <p>sidenav works! sidenav works! sidenav works! sidenav works!</p>
-    <p>sidenav works! sidenav works! sidenav works! sidenav works!</p>
-    <p>sidenav works! sidenav works! sidenav works! sidenav works!</p>
-    <p>sidenav works! sidenav works! sidenav works! sidenav works!</p>
-</div>
+<mat-nav-list>
+    <div class="app-logo">
+        <img src="assets/logo.png" alt="NaiveCat Logo" />
+    </div>
+    <a mat-list-item routerLink="/">
+        <mat-icon class="app-icon" fontIcon="home"></mat-icon> Main
+    </a>
+    <a mat-list-item routerLink="/crypto-index">
+        <mat-icon class="app-icon" fontIcon="currency_bitcoin"></mat-icon> Crypto Index
+    </a>
+</mat-nav-list>
