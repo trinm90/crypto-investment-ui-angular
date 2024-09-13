@@ -4,9 +4,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { environment } from '../environments/environment';
-
-declare var gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -26,9 +23,7 @@ export class AppComponent {
 
   sidebarOpen = false;
 
-  constructor() {
-    gtag('config', environment.firebase.measurementId, { page_path: '/app-root' });
-  }
+  constructor() { }
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
