@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(
-      NgxGoogleAnalyticsModule.forRoot(environment.firebase.measurementId)
+      NgxGoogleAnalyticsModule.forRoot('G-3Y7112XWCL')
     ),
     NgxGoogleAnalyticsRouterModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
