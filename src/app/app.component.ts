@@ -23,6 +23,8 @@ export class AppComponent {
 
   sidebarOpen = false;
 
+  constructor() { }
+
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
   }
