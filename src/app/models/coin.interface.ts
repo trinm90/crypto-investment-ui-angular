@@ -6,7 +6,8 @@ export interface CoinPrice {
 export interface InvestedCoin {
     id: string;
     symbol: string;
+    time: Date;
     boughtAtPrice: number;
     amount: number;
-    time: Date;
+    priceChange: number | undefined;
 }
