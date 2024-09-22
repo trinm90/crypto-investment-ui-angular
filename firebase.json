@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "crypto-investment-ui-long",
     "public": "dist/crypto-investment-ui-angular/browser",
     "ignore": [
       "firebase.json",

@@ -8,7 +8,7 @@ export const environment = {
         projectId: "crypto-investment-228a3",
         storageBucket: "crypto-investment-228a3.appspot.com",
         messagingSenderId: "363134486011",
-        appId: "1:363134486011:web:98f825347382241e4c375e",
-        measurementId: "G-2F0LD9C3ME"
+        appId: "1:363134486011:web:f367f16cb9414f574c375e",
+        measurementId: "G-7VFZZZ9EE4"
     }
 };

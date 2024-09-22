@@ -1,21 +1,20 @@
 <div class="justify-content-between" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
-    <div>
-        <button (click)="toggleSidebar()">
-            <mat-icon class="app-icon" fontIcon="menu"></mat-icon>
+    <div class="app-header-style">
+        <button mat-raised-button (click)="toggleSidebar()">
+            <mat-icon fontIcon="menu"></mat-icon>
         </button>
     </div>
-    <div style="margin-top: 9px">
-        <p>Version: {{version}}</p>
-    </div>
-    <div>
-        <button mat-button [matMenuTriggerFor]="userMenu">
+    <div class="app-header-style">
+        <button class="menu-item-justify" mat-raised-button [matMenuTriggerFor]="userMenu">
+            <mat-icon fontIcon="settings"></mat-icon>
             Tri Nguyen
-            <mat-icon class="app-icon" aria-hidden="false" aria-label="Notes" fontIcon="keyboard_arrow_down"></mat-icon>
         </button>
         <mat-menu #userMenu="matMenu">
+            <p mat-menu-item>Version: {{version}}</p>
+            <p mat-menu-item>API: {{api}}</p>
             <button mat-menu-item>
                 Logout
-                <mat-icon class="app-icon" aria-hidden="false" aria-label="Notes" fontIcon="logout"></mat-icon>
+                <mat-icon fontIcon="logout"></mat-icon>
             </button>
         </mat-menu>
     </div>
