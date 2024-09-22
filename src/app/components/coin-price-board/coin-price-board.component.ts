@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CoinPrice } from '../../models/coin.interface';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CoinPrice, InvestedCoin } from '../../models/coin.interface';
+import { CurrencyPipe, DatePipe, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.interface';
 
@@ -9,6 +9,7 @@ import { User } from '../../models/user.interface';
   selector: 'app-coin-price-board',
   standalone: true,
   imports: [
+    CommonModule,
     DatePipe,
     CurrencyPipe
   ],
@@ -27,9 +28,10 @@ export class CoinPriceBoardComponent {
     investedCoins: [{
       id: crypto.randomUUID(),
       symbol: 'BTCUSDT',
+      time: new Date(),
       boughtAtPrice: 99999,
       amount: 9,
-      time: new Date(),
+      priceChange: undefined,
     }]
   }
 
@@ -67,7 +69,7 @@ export class CoinPriceBoardComponent {
     const coin: CoinPrice = this.coinPrices[indexCoinPrice];
 
     const cost: number = amount * coin.price;
-    
+
     if (cost <= this.user.fund) {
       this.user.fund -= cost;
 
@@ -77,6 +79,7 @@ export class CoinPriceBoardComponent {
         boughtAtPrice: coin.price,
         amount: amount,
         time: new Date(),
+        priceChange: undefined,
       });
 
       this.transactionAmount = cost;
@@ -91,6 +94,7 @@ export class CoinPriceBoardComponent {
   private async updateLoop() {
     while (true) {
       this.getCoinPriceFromBinance();
+      this.calculatePriceChange();
       await this.delay(this.updateTimeInMs);
     }
   }
@@ -134,7 +138,14 @@ export class CoinPriceBoardComponent {
   }
 
   private calculatePriceChange() {
-
+    this.user.investedCoins.forEach((coin: InvestedCoin, index: number) => {
+      const coinIndex: number = this.coinPrices.findIndex(x => {
+        if (x.symbol === coin.symbol) {
+          const priceChanged = x.price - coin.boughtAtPrice;
+          coin.priceChange = parseFloat(priceChanged.toFixed(6));
+        }
+      });
+    });
   }
 
   private delay(ms: number) {

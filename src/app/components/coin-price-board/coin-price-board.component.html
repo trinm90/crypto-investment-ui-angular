@@ -23,9 +23,10 @@
         <thead>
             <tr>
                 <th>Symbol</th>
+                <th>Transaction Time</th>
                 <th>Bought At</th>
                 <th>Amount</th>
-                <th>Transaction Time</th>
+                <th>Price Changed</th>
                 <th></th>
             </tr>
         </thead>
@@ -33,9 +34,10 @@
             @for (investedCoin of user.investedCoins; track investedCoin.id) {
             <tr>
                 <td>{{investedCoin.symbol}}</td>
+                <td>{{investedCoin.time | date:'long'}}</td>
                 <td>{{investedCoin.boughtAtPrice | currency:'USD':'symbol'}}</td>
                 <td>{{investedCoin.amount}}</td>
-                <td>{{investedCoin.time | date:'long'}}</td>
+                <td [ngStyle]="{'color': (investedCoin.priceChange !== undefined && investedCoin.priceChange >= 0) ? 'green' : 'red'}" >{{investedCoin.priceChange}}</td>
                 <td><button (click)="sellCoins(investedCoin.symbol)">Sell</button></td>
             </tr>
             }
