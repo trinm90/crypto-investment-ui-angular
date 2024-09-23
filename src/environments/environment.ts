@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    version: '1.9.69',
+    version: '1.9.79',
     apiKey: 'devKey',
     firebase: {
         apiKey: "AIzaSyCjtJa5ltfFjk5PHWzWKUBKOO6Os7omEyc",
