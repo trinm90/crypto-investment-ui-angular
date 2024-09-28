@@ -2,7 +2,7 @@ export const environment = {
     production: true,
     version: '1.9.79',
     apiKey: 'devKey',
-    googleAnalyticsId: 'G-JNVQPFYJDG',
+    googleAnalyticsId: 'G-VMNJRR9EEQ',
     firebase: {
         apiKey: "AIzaSyCjtJa5ltfFjk5PHWzWKUBKOO6Os7omEyc",
         authDomain: "crypto-investment-228a3.firebaseapp.com",
