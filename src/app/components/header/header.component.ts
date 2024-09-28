@@ -23,7 +23,8 @@ export class HeaderComponent {
   @Output() toggleSidebarEmitter: EventEmitter<any> = new EventEmitter();
 
   version: string = environment.version;
-  api: string = environment.firebase.apiKey;
+  // api: string = environment.firebase.apiKey;
+  api: string = 'api key to be';
 
   toggleSidebar() {
     this.toggleSidebarEmitter.emit();
